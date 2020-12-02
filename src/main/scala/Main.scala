@@ -1,7 +1,7 @@
-@main def runDay(inputDir: String, day: Int, part: Int = 1): Unit =
+@main def runDay(inputDir: String, day: Int): Unit =
   val s = scala.io.Source.fromFile(s"${inputDir}/day${day}.txt").getLines
-  val out = (day, part) match {
-    case (1, 1) => day1_1(s.map(_.toInt).toList).toString
-    case (1, 2) => day1_2(s.map(_.toInt).toList).toString
+  val out = day match {
+    case 1 => day1(s.map(_.toInt).toList)
+    case 2 => day2(s.toList)
   }
   println(out)
