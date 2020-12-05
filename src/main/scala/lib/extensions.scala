@@ -12,3 +12,8 @@ extension (s: String)
       case Array(a, b) => Some((a.asInstanceOf[String], b.asInstanceOf[String]))
       case _ => None
     }
+
+  def substr(from: Int, to: Int): String =
+    s.substring(from, to).asInstanceOf[String]
+  def substr(from: Int): String =
+    s.substring(from).asInstanceOf[String]
