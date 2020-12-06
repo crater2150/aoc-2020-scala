@@ -7,5 +7,6 @@ package aoc2020
     case 3 => input(boolChar('#'))(day3)
     case 4 => input()(day4)
     case 5 => input()(day5)
+    case 6 => input()(day6)
   }
   println(out)
