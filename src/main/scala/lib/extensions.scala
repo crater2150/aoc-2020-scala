@@ -1,5 +1,16 @@
 package aoc2020.lib
 
+/* for splitting input with separator lines */
+extension [A](input: List[A])(using Eql[A,A])
+  def split(separator: A): LazyList[List[A]] =
+    input.span(_ != separator) match {
+        case (h,   _ :: t) => h #:: t.split(separator)
+        case (Nil, Nil)    => LazyList()
+        case (h,   Nil)    => LazyList(h)
+      }
+
+
+
 /* Using -Yexplicit-nulls isn't really ready for use with the java standard
  * library. e.g. String doesn't have `@NotNull` annotations
  */
