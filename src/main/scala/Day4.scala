@@ -1,3 +1,4 @@
+package aoc2020
 import aoc2020.lib.Passports._
 
 def day4(input: List[String]): String =

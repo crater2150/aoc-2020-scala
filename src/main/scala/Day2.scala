@@ -1,3 +1,4 @@
+package aoc2020
 def day2(passwords: List[String]): String =
   List(
     passwords.count(validAmount),

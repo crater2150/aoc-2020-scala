@@ -1,3 +1,4 @@
+package aoc2020
 
 import scala.io.Source
 

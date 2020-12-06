@@ -1,3 +1,4 @@
+package aoc2020
 @main def runDay(inputDir: String, day: Int): Unit =
   given Location(inputDir, day)
   val out = day match {

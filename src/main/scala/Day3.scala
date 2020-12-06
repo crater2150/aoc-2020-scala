@@ -1,3 +1,4 @@
+package aoc2020
 def day3(trees: List[Vector[Boolean]]): String =
   treesOnSlope(trees, 3).toString + "\n" + List(
     treesOnSlopeRec(trees, 1, 1),

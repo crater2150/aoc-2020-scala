@@ -1,3 +1,4 @@
+package aoc2020
 import aoc2020.lib._
 
 def day5(input: List[String]): String =
