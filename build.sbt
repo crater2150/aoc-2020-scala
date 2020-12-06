@@ -8,7 +8,8 @@ lazy val root = project
 
     scalaVersion := dottyVersion,
     scalacOptions ++= Seq(
-      "-Yexplicit-nulls"
+      "-Yexplicit-nulls",
+      "-language:strict-equality",
     ),
     libraryDependencies += "org.typelevel" %% "cats-core" % "2.3.0"
   )
