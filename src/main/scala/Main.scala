@@ -9,5 +9,6 @@ package aoc2020
     case 5 => input()(day5)
     case 6 => input()(day6)
     case 7 => input()(day7)
+    case 8 => input()(day8)
   }
   println(out)
