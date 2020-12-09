@@ -10,5 +10,7 @@ package aoc2020
     case 6 => input()(day6)
     case 7 => input()(day7)
     case 8 => input()(day8)
+    case 9 => input(_.toLong)(day9)
+    case _ => "No such day implemented"
   }
   println(out)
