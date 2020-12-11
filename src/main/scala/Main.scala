@@ -1,6 +1,7 @@
 package aoc2020
 @main def runDay(inputDir: String, day: Int): Unit =
   given Location(inputDir, day)
+  //given Fixed(sample)
   val out = day match {
     case 1 => input(_.toInt)(day1)
     case 2 => input()(day2)
@@ -15,3 +16,5 @@ package aoc2020
     case _ => "No such day implemented"
   }
   println(out)
+
+//val sample: List[String] = List()
