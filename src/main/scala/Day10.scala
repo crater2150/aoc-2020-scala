@@ -15,10 +15,10 @@ def day10(ratings: List[Int]): String =
 
 
 
-val adapterVariants: ((Int, List[Int])) => Long = memoize{ case (prev, remaining) => {
+val adapterVariants: ((Int, List[Int])) => Long = memoize((prev, remaining) => {
   remaining match {
     case h :: t if h < prev + 4 => adapterVariants(h, t) + adapterVariants(prev, t)
     case last :: Nil => 1
     case _ => 0
   }
-}}
+})
