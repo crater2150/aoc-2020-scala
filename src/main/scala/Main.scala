@@ -14,6 +14,7 @@ package aoc2020
     case 9 => input(_.toLong)(day9)
     case 10 => input(_.toInt)(day10)
     case 11 => inputF(boolChar('L'))(Vector)(day11)
+    case 12 => input()(day12)
     case _ => "No such day implemented"
   }
   println(out)
