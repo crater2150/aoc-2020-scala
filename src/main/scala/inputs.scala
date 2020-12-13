@@ -5,10 +5,12 @@ import scala.io.Source
 sealed trait InputSource
 case class Location(inputDir: String, day: Int) extends InputSource
 case class Fixed(lines: List[String]) extends InputSource
+case class SampleLocation(inputDir: String, day: Int, sample: Int) extends InputSource
 
 def inputLines(using src: InputSource): Iterator[String] = src match {
   case Location(inputDir, day) => scala.io.Source.fromFile(s"${inputDir}/day${day}.txt").getLines
   case Fixed(input) => input.iterator
+  case SampleLocation(inputDir, day, sample) => scala.io.Source.fromFile(s"${inputDir}/day${day}-sample${sample}.txt").getLines
 }
 
 
