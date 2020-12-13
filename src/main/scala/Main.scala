@@ -1,6 +1,6 @@
 package aoc2020
-@main def runDay(inputDir: String, day: Int, sample: Int = -1): Unit =
-  given InputSource = inputSource(inputDir, day, sample)
+@main def runDay(inputDir: String, day: Int, sample: Int*): Unit =
+  given InputSource = inputSource(inputDir, day, sample.headOption)
   val out = day match {
     case 1 => input(_.toInt)(day1)
     case 2 => input()(day2)
@@ -16,9 +16,9 @@ package aoc2020
     case 12 => input()(day12)
     case _ => "No such day implemented"
   }
-  if (sample > 0) println("SAMPLE VALUES!")
+  if (sample.nonEmpty) println("SAMPLE VALUES!")
   println(out)
 
-def inputSource(inputDir:String, day: Int, sample: Int) =
-  if (sample > 0) then SampleLocation(inputDir, day, sample)
-  else Location(inputDir, day)
+def inputSource(inputDir:String, day: Int, sample: Option[Int]) =
+  sample.map(SampleLocation(inputDir, day, _))
+    .getOrElse(Location(inputDir, day))
