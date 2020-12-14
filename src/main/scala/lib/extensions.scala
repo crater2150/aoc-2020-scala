@@ -2,13 +2,13 @@ package aoc2020.lib
 
 /* for splitting input with separator lines */
 extension [A](input: List[A])(using Eql[A,A])
-  def split(separator: A): LazyList[List[A]] =
+  def split(separator: A, keepSeparator: Boolean = false): LazyList[List[A]] =
     input.span(_ != separator) match {
-        case (h,   _ :: t) => h #:: t.split(separator)
-        case (Nil, Nil)    => LazyList()
-        case (h,   Nil)    => LazyList(h)
+        case (Nil, Nil)              => LazyList()
+        case (h,   Nil)              => LazyList(h)
+        case (h,   tail as (_ :: t)) =>
+          h #:: (if keepSeparator then tail else t).split(separator)
       }
-
 
 
 /* Using -Yexplicit-nulls isn't really ready for use with the java standard
