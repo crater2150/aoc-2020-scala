@@ -15,6 +15,7 @@ package aoc2020
     case 11 => inputF(boolChar('L'))(Vector)(day11)
     case 12 => input()(day12)
     case 13 => input()(day13)
+    case 14 => input()(day14)
     case _ => "No such day implemented"
   }
   if (sample.nonEmpty) println("SAMPLE VALUES!")
