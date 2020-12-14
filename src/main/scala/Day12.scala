@@ -32,7 +32,7 @@ enum Instruction {
 import Instruction._
 object Instruction {
   def parse(input: List[String]): List[Instruction] = 
-  input.map(s => (s(0), s.substr(1).toInt) match {
+  input.map(s => (s(0), s.substring(1).nn.toInt) match {
     case ('L', deg) => Rot(Dir(deg))
     case ('R', deg) => Rot(Dir(-deg))
     case ('F', dist) => Forward(dist)

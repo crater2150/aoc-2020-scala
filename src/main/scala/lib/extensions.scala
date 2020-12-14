@@ -12,19 +12,17 @@ extension [A](input: List[A])(using Eql[A,A])
 
 
 /* Using -Yexplicit-nulls isn't really ready for use with the java standard
- * library. e.g. String doesn't have `@NotNull` annotations
+ * library. e.g. String doesn't have `@NotNull` annotations for its methods
  */
-extension (s: String) 
-  def splitNN(regex: String, limit: Int = 0): List[String] =
-    s.split(regex, limit).asInstanceOf[Array[String]].toList
-
+extension (s: String)
   def splitOnce(regex: String): Option[(String, String)] =
     s.split(regex, 2) match {
-      case Array(a, b) => Some((a.asInstanceOf[String], b.asInstanceOf[String]))
+      case Array(a, b) => Some((a.nn, b.nn))
       case _ => None
     }
 
-  def substr(from: Int, to: Int): String =
-    s.substring(from, to).asInstanceOf[String]
-  def substr(from: Int): String =
-    s.substring(from).asInstanceOf[String]
+extension (s: String | UncheckedNull)
+  def nn: String = s.asInstanceOf[String]
+
+extension (s: Array[String | UncheckedNull] | UncheckedNull)
+  def nn: List[String] = s.asInstanceOf[Array[String]].toList

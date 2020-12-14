@@ -7,7 +7,7 @@ import cats._, cats.implicits.given
 def day13(input: List[String]): String =
   input match {
     case timestamp :: busses :: Nil =>
-      val idsWithOffsets = busses.splitNN(",")
+      val idsWithOffsets = busses.split(",").nn
         .zipWithIndex
         .filter(_._1 != "x")
         .map { (id, offset) => (id.toLong, offset.toLong) }

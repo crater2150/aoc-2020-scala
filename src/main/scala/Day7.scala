@@ -24,8 +24,8 @@ def parseSingle(rule: String): BagRules =
 
 
 def parseContents(bags: String): List[(String, Int)] = 
-  bags.splitNN(" bags?, ").map ( bagSpec => {
-    val List(amount, color) = bagSpec.splitNN(" ", 2)
+  bags.split(" bags?, ").nn.map ( bagSpec => {
+    val List(amount, color) = bagSpec.split(" ", 2).nn
     (color, amount.toInt)
   })
 

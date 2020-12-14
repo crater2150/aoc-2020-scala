@@ -8,7 +8,7 @@ object Passports {
         (
         for 
           l     <- lines
-          field <- l.splitNN(" ", 0)
+          field <- l.split(" ", 0).nn
           pair  <- field.splitOnce(":")
         yield pair
         ).toMap

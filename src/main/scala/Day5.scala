@@ -9,8 +9,8 @@ def day5(input: List[String]): String =
 
 def seatCoords(code: String): (Int, Int) =
   (
-    recursiveSeat('B', 'F')(code.substr(0,7).toList, 0, 127),
-    recursiveSeat('R', 'L')(code.substr(7).toList, 0, 7)
+    recursiveSeat('B', 'F')(code.substring(0,7).nn.toList, 0, 127),
+    recursiveSeat('R', 'L')(code.substring(7).nn.toList, 0, 7)
   )
 
 
