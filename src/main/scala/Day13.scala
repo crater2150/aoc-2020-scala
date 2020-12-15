@@ -1,6 +1,5 @@
 package aoc2020
 import aoc2020.lib._
-import cats.implicits.given
 import scala.math.{min,max}
 import cats._, cats.implicits.given
 

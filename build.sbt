@@ -11,7 +11,8 @@ lazy val root = project
       "-Yexplicit-nulls",
       "-language:strict-equality",
     ),
-    libraryDependencies += "org.typelevel" %% "cats-core" % "2.3.0"
+    libraryDependencies += "org.typelevel" %% "cats-core" % "2.3.0",
   )
+  .enablePlugins(JmhPlugin)
 
-Runtime / unmanagedSources += baseDirectory.value / "input",
+Runtime / unmanagedSources += baseDirectory.value / "input"

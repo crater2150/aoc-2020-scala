@@ -16,6 +16,7 @@ package aoc2020
     case 12 => input()(day12)
     case 13 => input()(day13)
     case 14 => input()(day14)
+    case 15 => input()(day15)
     case _ => "No such day implemented"
   }
   if (sample.nonEmpty) println("SAMPLE VALUES!")
