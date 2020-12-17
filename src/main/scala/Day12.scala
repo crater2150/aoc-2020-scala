@@ -1,6 +1,7 @@
 package aoc2020
 import aoc2020.lib._
 import aoc2020.lib.Vectors._
+import aoc2020.lib.Directions._
 
 def day12(input: List[String]): String =
   val directions = Instruction.parse(input)
