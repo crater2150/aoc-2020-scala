@@ -1,7 +1,7 @@
 package aoc2020.lib
 
 /* for splitting input with separator lines */
-extension [A](input: List[A])(using Eql[A,A])
+extension [A](input: List[A])(using CanEqual[A,A])
   def split(separator: A, keepSeparator: Boolean = false): LazyList[List[A]] =
     input.span(_ != separator) match {
         case (Nil, Nil)              => LazyList()

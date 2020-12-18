@@ -51,25 +51,25 @@ object Vectors {
       }
       def manhattan: T = v._1.abs + v._2.abs
       def neighbours: List[Vec2D[T]] =
-        neighbours(2).map(n => v + (n(0), n(1)))
+        neighbourCoords(2).map(n => v + (n(0), n(1)))
 
   given [T: Numeric] as Vec[Vec3D[T]]:
     extension (v: Vec3D[T])
       def +(w: Vec3D[T]): Vec3D[T] = (v._1 + w._1, v._2 + w._2, v._3 + w._3)
       def neighbours: List[Vec3D[T]] =
-        neighbours(3).map(n => v + (n(0), n(1), n(2)))
+        neighbourCoords(3).map(n => v + (n(0), n(1), n(2)))
 
   given [T: Numeric] as Vec[Vec4D[T]]:
     extension (v: Vec4D[T])
       def +(w: Vec4D[T]): Vec4D[T] = (v._1 + w._1, v._2 + w._2, v._3 + w._3, v._4 + w._4)
       def neighbours: List[Vec4D[T]] =
-        neighbours(4).map(n => v + (n(0), n(1), n(2), n(3)))
+        neighbourCoords(4).map(n => v + (n(0), n(1), n(2), n(3)))
 
 
   /* compute these only once per type and dimension*/
   import scala.collection.mutable
   private var _neighbourCache = mutable.Map[(Numeric[_], Int), List[List[_]]]()
-  def neighbours[T](dim: Int)(using n: Numeric[T]): List[List[T]] =
+  def neighbourCoords[T](dim: Int)(using n: Numeric[T]): List[List[T]] =
     _neighbourCache.get((n, dim)) match {
       case None =>
         val self = List.fill(dim)(n.zero)

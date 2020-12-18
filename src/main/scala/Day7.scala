@@ -4,11 +4,11 @@ import cats._
 import cats.implicits.given
 
 def day7(input: List[String]):String =
-  val rules = parseRules(input)
+  val rules = parseBags(input)
   //findPossibleSuperbags(rules, "shiny gold").size.toString
   subBags(rules, "shiny gold").toString
 
-def parseRules(input: List[String]): BagRules =
+def parseBags(input: List[String]): BagRules =
   input.map(parseSingle).combineAll
 
 val RuleFormat = raw"(.*) bags contain (?:(no other)|(.*)) bags?.".r
