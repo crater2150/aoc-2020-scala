@@ -1,4 +1,5 @@
 package aoc2020
+import aoc2020.lib._
 @main def runDay(inputDir: String, day: Int, sample: Int*): Unit =
   given InputSource = inputSource(inputDir, day, sample.headOption)
   val out = day match {
@@ -19,6 +20,7 @@ package aoc2020
     case 15 => input()(day15)
     case 16 => input()(day16)
     case 17 => input(boolChar('#'))(day17)
+    case 18 => input()(day18)
     case _ => "No such day implemented"
   }
   if (sample.nonEmpty) println("SAMPLE VALUES!")

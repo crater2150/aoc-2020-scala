@@ -12,61 +12,60 @@ def day17(input: List[Vector[Boolean]]): String =
 
   val states = (1 to 6).scanLeft(active)((act, _) => step(act))
   val states4d = (1 to 6).scanLeft(active4d)((act, _) => step(act))
-  states.map(_.count(_._2)).mkString("Active cells (3D): ", " →  ", "\n")
-    + states4d.map(_.count(_._2)).mkString("Active cells (4D): ", " →  ", "\n")
+  states.map(_.size).mkString("Active cells (3D): ", " →  ", "\n")
+    + states4d.map(_.size).mkString("Active cells (4D): ", " →  ", "\n")
 
 
-def step[T: Vec](active: Map[T, Boolean]): Map[T, Boolean] =
-  neighbourhood(active).map((coord, act) => {
-    val actNeigh = coord.neighbours.count(active.getOrElse(_, false))
-    val actNext = (act && actNeigh == 2) || actNeigh == 3
-    coord -> actNext
+def step[T: Vec](active: Set[T]): Set[T] =
+  neighbourhood(active).flatMap((coord) => {
+    val actNeigh = coord.neighbours.count(active)
+    if (active(coord) && actNeigh == 2) || actNeigh == 3 then Set(coord)
+    else Set.empty
   })
 
-def activeSpace[T](input: List[Vector[Boolean]])(key: (Int, Int) => T): Map[T, Boolean] =
+def activeSpace[T](input: List[Vector[Boolean]])(key: (Int, Int) => T): Set[T] =
   (for (line, x) <- input.zipWithIndex
        (act, y) <- line.zipWithIndex
-   yield key(x, y) -> act
-  ) .toMap
+       if act
+   yield key(x, y)
+  ).toSet
 
-def neighbourhood[T:Vec](active: Map[T, Boolean]): Map[T, Boolean] =
-  active ++ (for (coord, _) <- active.filter(_._2)
-                 inactive <- coord.neighbours.filterNot(active.contains)
-             yield inactive -> false
-            ).toMap
+def neighbourhood[T:Vec](active: Set[T]): Set[T] =
+  active ++ (for (coord) <- active
+                 inactive <- coord.neighbours.filterNot(active)
+             yield inactive)
 
 /** create a string representation similar to the one in the instructions for
  *  debugging */
 
-def showField(field: Map[Coord3, Boolean]): String =
+def showField(field: Set[Coord3]): String =
   // maxima in each direction for active space only
   val (xmin, xmax, ymin, ymax, zmin, zmax) =
     field.foldLeft((Int.MaxValue, Int.MinValue, Int.MaxValue, Int.MinValue, Int.MaxValue, Int.MinValue)){
-      case ((xmin, xmax, ymin, ymax, zmin, zmax), (x: Int,y: Int,z: Int) -> true) =>
+      case ((xmin, xmax, ymin, ymax, zmin, zmax), (x: Int,y: Int,z: Int)) =>
         (xmin min x, xmax max x, ymin min y, ymax max y, zmin min z, zmax max z)
-      case (extrema, _ -> false) => extrema
     }
+
   (for { z <- zmin to zmax } yield (
        for { x <- xmin to xmax } yield (
             for { y <- ymin to ymax }
-            yield if field.getOrElse(Vec3D(x,y,z), false) then '#' else '.'
+            yield if field(Vec3D(x,y,z)) then '#' else '.'
           ).mkString
         ).mkString(s"\n z=$z\n","\n","")
       ).mkString("\n")
 
-def showField4d(field: Map[Coord4, Boolean]): String =
+def showField4d(field: Set[Coord4]): String =
   // maxima in each direction for active space only
   val (xmin, xmax, ymin, ymax, zmin, zmax, wmin, wmax) =
     field.foldLeft((Int.MaxValue, Int.MinValue, Int.MaxValue, Int.MinValue, Int.MaxValue, Int.MinValue, Int.MaxValue, Int.MinValue)){
-      case ((xmin, xmax, ymin, ymax, zmin, zmax, wmin, wmax), (x:Int,y:Int,z:Int,w:Int) -> true) =>
+      case ((xmin, xmax, ymin, ymax, zmin, zmax, wmin, wmax), (x:Int,y:Int,z:Int,w:Int)) =>
         (xmin min x, xmax max x, ymin min y, ymax max y, zmin min z, zmax max z, wmin min w, wmax max w)
-      case (extrema, _ -> false) => extrema
     }
   (for { w <- wmin to wmax } yield (
     for { z <- zmin to zmax } yield (
          for { x <- xmin to xmax } yield (
               for { y <- ymin to ymax }
-              yield if field.getOrElse(Vec4D(x,y,z,w), false) then '#' else '.'
+              yield if field(Vec4D(x,y,z,w)) then '#' else '.'
             ).mkString
           ).mkString(s"\n--- z=$z; w=$w\n","\n","")
         ).mkString
