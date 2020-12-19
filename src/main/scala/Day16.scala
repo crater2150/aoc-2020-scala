@@ -35,7 +35,7 @@ def findErrors(rules: Rules)(ticket: Vector[Int]): Vector[Int] =
   ticket.filter(num => !rules.values.flatten.exists(_ contains num))
 
 def findFields(rules: Rules)(tickets: Vector[Vector[Int]]) =
-  val candidates = tickets.transpose.map(col => rules.filter((rule, ranges) => 
+  val candidates = tickets.transpose.map(col => rules.filter((rule, ranges) =>
           col.forall(c => ranges.exists(_ contains c))
       ).keys.toSet)
   candidates.zipWithIndex.sortBy(_._1.size).foldLeft(Map[String, Int]()){

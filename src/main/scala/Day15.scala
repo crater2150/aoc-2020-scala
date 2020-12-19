@@ -20,7 +20,7 @@ def play(starting: Map[Long, Long], maxTurns: Long) =
   val (lastNum, lastTurn) = starting.maxBy(_._2)
 
   (lastTurn to maxTurns-1).foldLeft((lastNum, starting - lastNum)){
-    case ((last, spoken), turn) => 
+    case ((last, spoken), turn) =>
       val next = spoken.get(last).map(turn - _).getOrElse(0L)
       val nowSpoken = spoken.updated(last, turn)
       (next, nowSpoken)
