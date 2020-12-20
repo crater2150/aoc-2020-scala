@@ -20,6 +20,12 @@ object Vectors {
       def +(w: T): T
       def neighbours: List[T]
 
+  given [T : Show] as Show[Vec2D[T]]:
+    def show(v: Vec2D[T]): String = show"Vec(${v._1}, ${v._2})"
+  given [T : Show] as Show[Vec3D[T]]:
+    def show(v: Vec3D[T]): String = show"Vec(${v._1}, ${v._2}, ${v._3})"
+  given [T : Show] as Show[Vec4D[T]]:
+    def show(v: Vec4D[T]): String = show"Vec(${v._1}, ${v._2}, ${v._3}, ${v._4})"
 
   given [T: Numeric] as Vec[Vec2D[T]]:
     extension (v: Vec2D[T])
@@ -96,6 +102,8 @@ object Directions {
       case 'S' => South
     }
 
+  def Dir(deg: Int): Dir = (deg % 360 + 360) % 360
+
   extension (dir: Dir)
     def +(deg: Int|Dir): Dir = (dir + deg) % 360
     def -(deg: Int|Dir): Dir = ((dir - deg) % 360 + 360) % 360
@@ -107,5 +115,34 @@ object Directions {
       case South => "South"
     }
 
-  def Dir(deg: Int): Dir = (deg % 360 + 360) % 360
+    def flip: Dir = dir.flipHor.flipVert
+
+    def flipHor: Dir = dir match {
+      case West => East
+      case East => West
+      case o => o
+    }
+
+    def flipVert: Dir = dir match {
+      case North => South
+      case South => North
+      case o => o
+    }
+
+    def rotLeft: Dir = dir match {
+      case North => West
+      case South => East
+      case West => South
+      case East => North
+    }
+
+    def rotRight: Dir = dir match {
+      case North => East
+      case South => West
+      case West => North
+      case East => South
+    }
+
+  given Show[Dir]:
+    def show(d: Dir): String = d.str
 }
