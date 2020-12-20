@@ -26,3 +26,7 @@ extension (s: String | UncheckedNull)
 
 extension (s: Array[String | UncheckedNull] | UncheckedNull)
   def nn: List[String] = s.asInstanceOf[Array[String]].toList
+
+
+extension [K,V,W](map: Map[K,V])
+  def mapValuesS(f: V => W): Map[K, W] = map.view.mapValues(f).toMap

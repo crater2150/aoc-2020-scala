@@ -13,7 +13,7 @@ def day16(input: List[String]): String =
       case err => (errors + err.sum, valids)
     }}
   val columns = findFields(rules)(valid)
-  val departureInfo = columns.filter(_._1.startsWith("departure")).view.mapValues(own(_)).toMap
+  val departureInfo = columns.filter(_._1.startsWith("departure")).mapValuesS(own(_))
   val checksum = departureInfo.values.map(_.toLong).product
 
   s"""Error rate: $errorRate\n

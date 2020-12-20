@@ -149,7 +149,7 @@ object day19 extends (List[String] => String) {
 
       extension (rules: Rules)
         def optimize: Rules =
-          val opt = rules.view.mapValues(Optimizer.optimizeSingle(rules)).toMap
+          val opt = rules.mapValuesS(Optimizer.optimizeSingle(rules))
           if opt == rules then opt else opt.optimize
 
         def prune(root: Int = 0): Rules =
