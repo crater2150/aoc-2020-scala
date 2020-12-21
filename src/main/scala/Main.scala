@@ -23,6 +23,7 @@ import aoc2020.lib._
     case 18 => input()(day18)
     case 19 => input()(day19)
     case 20 => input()(day20)
+    case 21 => input()(day21)
     case _ => "No such day implemented"
   }
   if (sample.nonEmpty) println("SAMPLE VALUES!")
