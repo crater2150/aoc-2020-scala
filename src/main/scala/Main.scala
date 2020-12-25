@@ -27,6 +27,7 @@ import aoc2020.lib._
     case 22 => input()(day22)
     case 23 => flatInputF(_.map(_.toInt - '0'))(Vector)(day23)
     case 24 => input()(day24)
+    case 25 => input(_.toLong)(day25)
     case _ => "No such day implemented"
   }
   if (sample.nonEmpty) println("SAMPLE VALUES!")
